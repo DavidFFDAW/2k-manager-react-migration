@@ -1,22 +1,33 @@
+import { CircularProgress } from '@mui/material';
 import { SnackbarProvider } from 'notistack';
 import { Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Links from './components/Links';
+import RoutesWithNotFound from './components/RoutesWithNotFound';
+import { UserProvider } from './contexts/user.context';
+import { AuthGuard } from './guards/auth.guard';
+import { AppRoutes, PrivateRoutes } from './models/routes';
+import PrivateRoutingModule from './pages/Private/PrivateRoutingModule';
 import './App.css';
-import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
-import Login from './pages/Login';
 
-const Home = lazy(() => import('./pages/Home/Home'));
+const Login = lazy(() => import('./pages/Login'));
 
 function App() {
     return (
         <SnackbarProvider maxSnack={4}>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<CircularProgress />}>
                 <BrowserRouter>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/login" element={<Login />} />
-                        <PrivateRoute path="/test" element={<Home />} />
-                    </Routes>
+                    <UserProvider>
+                        <Links />
+                        <RoutesWithNotFound>
+                            <Route path="/" element={<h1>MAIN</h1>} />
+                            <Route path={AppRoutes.LOGIN} element={<Login />} />
+
+                            <Route element={<AuthGuard privateValidation={true} />}>
+                                <Route path={`${PrivateRoutes.PRIVATE}/*`} element={<PrivateRoutingModule />} />
+                            </Route>
+                        </RoutesWithNotFound>
+                    </UserProvider>
                 </BrowserRouter>
             </Suspense>
         </SnackbarProvider>
