@@ -1,8 +1,25 @@
 #root {
+    width: 100%;
     max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
+    /* margin: 0 auto; */
+    /* padding: 2rem; */
     text-align: center;
+}
+.w-100 {
+    width: 100%;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 500;
+    margin: 0;
+}
+a.link {
+    color: #fff;
+    text-decoration: none;
 }
 .input label {
     display: block;
