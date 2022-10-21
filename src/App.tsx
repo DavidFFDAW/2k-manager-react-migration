@@ -7,10 +7,10 @@ import RoutesWithNotFound from './components/RoutesWithNotFound';
 import { UserProvider } from './contexts/user.context';
 import { AuthGuard } from './guards/auth.guard';
 import { AppRoutes, PrivateRoutes } from './models/routes';
-import PrivateRoutingModule from './pages/Private/PrivateRoutingModule';
 import './App.css';
 
 const Login = lazy(() => import('./pages/Login'));
+const PrivateRoutingModule = lazy(() => import('./pages/Private/PrivateRoutingModule'));
 
 function App() {
     return (
@@ -18,7 +18,7 @@ function App() {
             <Suspense fallback={<CircularProgress />}>
                 <BrowserRouter>
                     <UserProvider>
-                        <Links />
+                        {/* <Links /> */}
                         <RoutesWithNotFound>
                             <Route path="/" element={<h1>MAIN</h1>} />
                             <Route path={AppRoutes.LOGIN} element={<Login />} />
