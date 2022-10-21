@@ -1,17 +1,87 @@
+import { Button, IconButton, InputAdornment, TextField } from '@mui/material';
+
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import SendIcon from '@mui/icons-material/Send';
+
 import { useState } from 'react';
-import { Input } from '../../components/Input/input';
-import { validateNotEmpty } from '../../components/Input/validators/input.validators';
+import { emptyUserState, LoginUser } from '../../models/User';
+import { Link, redirect, useNavigate } from 'react-router-dom';
+import { AppRoutes, PrivateRoutes } from '../../models/routes';
+import { persistUserObject } from '../../services/auth.service';
 
 export default function Login() {
-    const [state, setState] = useState('');
+    const [state, setState] = useState<LoginUser>(emptyUserState);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    const navigate = useNavigate();
 
-    const validators = [validateNotEmpty];
+    const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        console.log(state);
+
+        persistUserObject({
+            name: 'John Doe',
+            email: 'example',
+            token: '1234567890',
+        });
+
+        navigate(`/${PrivateRoutes.PRIVATE}`, { replace: true });
+    };
 
     return (
-        <div className="Home">
-            <h1>Login</h1>
-            <Input type="text" validators={validators} name={'Test'} setExternalValue={setState} />
-            <div>{state}</div>
+        <div className="login">
+            <h1>
+                <img src="/icons/icon-192x192.png" alt="" />
+            </h1>
+            <form action="" onSubmit={ev => submitForm(ev)} method="GET">
+                <div className="flex space column alg-start" style={{ height: '205px' }}>
+                    <TextField
+                        fullWidth
+                        type="text"
+                        label="Email"
+                        placeholder="example@email.com"
+                        autoComplete="email"
+                        aria-autocomplete="list"
+                        className="w-100"
+                        value={state.email}
+                        onChange={e => setState({ ...state, email: e.target.value })}
+                        required
+                    />
+
+                    <TextField
+                        fullWidth
+                        label="Contraseña"
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="Password"
+                        className="w-100"
+                        autoComplete="current-password"
+                        aria-autocomplete="list"
+                        value={state.password}
+                        onChange={e => setState({ ...state, password: e.target.value })}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton onClick={() => setShowPassword(prev => !prev)}>
+                                        {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
+                        required
+                    />
+
+                    <div className="w-100 flex space row">
+                        <Link to={AppRoutes.REGISTER}>
+                            <Button variant="outlined" color="primary" className="w-100">
+                                Registrar
+                            </Button>
+                        </Link>
+                        <Button type="submit" variant="contained" color="primary" endIcon={<SendIcon />}>
+                            Enviar
+                        </Button>
+                    </div>
+                </div>
+            </form>
         </div>
     );
 }
