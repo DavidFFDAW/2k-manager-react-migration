@@ -8,7 +8,8 @@ import { PersistableUser, User } from '../models/User';
 export const createPersistableDataUser = (user: User): PersistableUser => {
     return {
         id: user.id,
-        username: user.username,
+        email: user.email,
+        username: user.name,
         token: user.token,
     };
 };

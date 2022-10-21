@@ -6,4 +6,5 @@ export enum AppRoutes {
 export enum PrivateRoutes {
     PRIVATE = 'private',
     DASHBOARD = 'dashboard',
+    USER = 'user/me',
 }
