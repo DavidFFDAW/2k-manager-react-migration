@@ -17,7 +17,6 @@ export default function Login() {
 
     const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(state);
 
         persistUserObject({
             name: 'John Doe',
@@ -27,6 +26,8 @@ export default function Login() {
 
         navigate(`/${PrivateRoutes.PRIVATE}`, { replace: true });
     };
+
+    const color = 'secondary';
 
     return (
         <div className="login">
@@ -42,6 +43,7 @@ export default function Login() {
                         placeholder="example@email.com"
                         autoComplete="email"
                         aria-autocomplete="list"
+                        color={color}
                         className="w-100"
                         value={state.email}
                         onChange={e => setState({ ...state, email: e.target.value })}
@@ -53,6 +55,7 @@ export default function Login() {
                         label="Contraseña"
                         type={showPassword ? 'text' : 'password'}
                         placeholder="Password"
+                        color={color}
                         className="w-100"
                         autoComplete="current-password"
                         aria-autocomplete="list"
@@ -72,11 +75,11 @@ export default function Login() {
 
                     <div className="w-100 flex space row">
                         <Link to={AppRoutes.REGISTER}>
-                            <Button variant="outlined" color="primary" className="w-100">
+                            <Button variant="outlined" color={color} className="w-100">
                                 Registrar
                             </Button>
                         </Link>
-                        <Button type="submit" variant="contained" color="primary" endIcon={<SendIcon />}>
+                        <Button type="submit" variant="contained" color={color} endIcon={<SendIcon />}>
                             Enviar
                         </Button>
                     </div>
