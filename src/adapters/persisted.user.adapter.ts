@@ -9,7 +9,7 @@ export const createPersistableDataUser = (user: User): PersistableUser => {
     return {
         id: user.id,
         email: user.email,
-        username: user.name,
+        username: user.username,
         token: user.token,
     };
 };
