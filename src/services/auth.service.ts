@@ -1,7 +1,8 @@
 import { createPersistableDataUser } from '../adapters/persisted.user.adapter';
+import { AppConfig } from '../AppConfig';
 import { PersistableUser, User } from '../models/User';
 
-const userKey: string = 'auth';
+const userKey: string = AppConfig.USER_KEY;
 const emptyUserInitialState: PersistableUser = {};
 
 export const getPersistedUserObject = (): User => {
