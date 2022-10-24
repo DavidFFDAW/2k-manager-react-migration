@@ -1,4 +1,8 @@
 :root {
+    --primary-color: #1976d2;
+    --secondary-color: #646cff;
+    --ternary-color: #fff;
+
     font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
     font-size: 16px;
     line-height: 24px;
@@ -40,7 +44,15 @@
 .flex.wrap {
     flex-wrap: wrap;
 }
-
+.primary-color {
+    color: var(--primary-color);
+}
+.secondary-color {
+    color: var(--secondary-color);
+}
+.ternary-color {
+    color: var(--ternary-color);
+}
 a {
     font-weight: 500;
     color: #646cff;
@@ -55,7 +67,7 @@ body {
     display: flex;
     place-items: center;
     min-width: 320px;
-    min-height: 100vh;
+    min-height: 250vw;
 }
 
 h1 {

@@ -4,6 +4,7 @@
     margin: 0 auto;
     /* padding: 2rem; */
     text-align: center;
+    min-height: 250vw;
 }
 .w-100 {
     width: 100%;
@@ -21,6 +22,15 @@ a.link {
     color: #fff;
     text-decoration: none;
 }
+
+.css-cblmom-MuiButtonBase-root-MuiFab-root,
+.fab {
+    position: fixed !important;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999 !important;
+}
+
 .input label {
     display: block;
     margin-bottom: 0.2rem;
