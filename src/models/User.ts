@@ -16,6 +16,7 @@ export interface PersistableUser {
 export interface LoginUser {
     email: string;
     password: string;
+    valid?: boolean;
 }
 
 export const emptyUserState: LoginUser = {
