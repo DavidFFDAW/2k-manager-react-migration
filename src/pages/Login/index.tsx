@@ -6,25 +6,27 @@ import SendIcon from '@mui/icons-material/Send';
 
 import { useState } from 'react';
 import { emptyUserState, LoginUser } from '../../models/User';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppRoutes, PrivateRoutes } from '../../models/routes';
-import { persistUserObject } from '../../services/auth.service';
+import { useAuth } from '../../hooks/useAuth';
+import { validateForm } from './validators/form.validator';
+import { useSnackbar } from 'notistack';
 
 export default function Login() {
-    const [state, setState] = useState<LoginUser>(emptyUserState);
+    const [state, setState] = useState<LoginUser>({ ...emptyUserState, valid: false });
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const navigate = useNavigate();
+    const snackbar = useSnackbar();
+    const auth = useAuth();
 
     const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        persistUserObject({
-            name: 'John Doe',
-            email: 'example',
-            token: '1234567890',
-        });
+        if (!state.valid) return snackbar.enqueueSnackbar('Revisa los campos del formulario', { variant: 'error' });
 
-        navigate(`/${PrivateRoutes.PRIVATE}`, { replace: true });
+        auth.tryLogInUser(state).then(() => {
+            navigate(`/${PrivateRoutes.PRIVATE}`, { replace: true });
+        });
     };
 
     const color = 'secondary';
@@ -46,7 +48,7 @@ export default function Login() {
                         color={color}
                         className="w-100"
                         value={state.email}
-                        onChange={e => setState({ ...state, email: e.target.value })}
+                        onChange={e => setState({ ...state, email: e.target.value, valid: validateForm(state) })}
                         required
                     />
 
@@ -60,7 +62,7 @@ export default function Login() {
                         autoComplete="current-password"
                         aria-autocomplete="list"
                         value={state.password}
-                        onChange={e => setState({ ...state, password: e.target.value })}
+                        onChange={e => setState({ ...state, password: e.target.value, valid: validateForm(state) })}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">
@@ -79,7 +81,13 @@ export default function Login() {
                                 Registrar
                             </Button>
                         </Link>
-                        <Button type="submit" variant="contained" color={color} endIcon={<SendIcon />}>
+                        <Button
+                            disabled={!state.valid}
+                            type="submit"
+                            variant="contained"
+                            color={color}
+                            endIcon={<SendIcon />}
+                        >
                             Enviar
                         </Button>
                     </div>
