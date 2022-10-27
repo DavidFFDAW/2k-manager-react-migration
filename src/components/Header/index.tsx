@@ -1,9 +1,8 @@
 import { Box, AppBar, Toolbar, IconButton, Typography, Button } from '@mui/material';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import { getPersistedUserObject, removePersistedUserObject } from '../../services/auth.service';
-import { PersistableUser } from '../../models/User';
-import { Link, useNavigate } from 'react-router-dom';
-import { AppRoutes, PrivateRoutes } from '../../models/routes';
+import { removePersistedUserObject } from '../../services/auth.service';
+import { useNavigate } from 'react-router-dom';
+import { AppRoutes } from '../../models/routes';
 
 export default function Header() {
     // const loggedUser: PersistableUser = getPersistedUserObject();
