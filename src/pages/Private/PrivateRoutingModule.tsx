@@ -15,9 +15,9 @@ function PrivateRoutingModule() {
             <RoutesWithNotFound>
                 <Route path="/" element={<Navigate to={PrivateRoutes.DASHBOARD} />}></Route>
                 <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard />}></Route>
-                <Route path={PrivateRoutes.CHAMPIONS} element={<Champions />}></Route>
-                <Route path={PrivateRoutes.TEAMS} element={<h1>USER ME</h1>}></Route>
-                <Route path={PrivateRoutes.USER} element={<h1>USER ME</h1>}></Route>
+                <Route path={PrivateRoutes.CHAMPIONS} element={<Champions hasAdminPermission={true} />}></Route>
+                <Route path={PrivateRoutes.TEAMS} element={<h1 style={{ marginTop: 100 }}>USER ME</h1>}></Route>
+                <Route path={PrivateRoutes.USER} element={<h1 style={{ marginTop: 100 }}>USER ME</h1>}></Route>
             </RoutesWithNotFound>
         </>
     );
