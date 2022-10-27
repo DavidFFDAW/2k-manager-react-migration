@@ -3,7 +3,7 @@ import { PrivateRoutes } from '../../../models/routes';
 import PersonIcon from '@mui/icons-material/Person';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import GroupsIcon from '@mui/icons-material/Groups';
-import { BoxContainer } from '../../../components/DashboardLink/BoxContainer';
+import { BoxContainer } from '../../../components/BoxContainer/BoxContainer';
 import { makePrivateRoute } from '../../../utilities/private.route.utility';
 
 export default function Dashboard() {
