@@ -2,6 +2,7 @@ import { DashboardLink } from '../../../components/DashboardLink';
 import { PrivateRoutes } from '../../../models/routes';
 import PersonIcon from '@mui/icons-material/Person';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import ArticleIcon from '@mui/icons-material/Article';
 import GroupsIcon from '@mui/icons-material/Groups';
 import { BoxContainer } from '../../../components/BoxContainer/BoxContainer';
 import { makePrivateRoute } from '../../../utilities/private.route.utility';
@@ -17,6 +18,7 @@ export default function Dashboard() {
                     icon={<EmojiEventsIcon />}
                 />
                 <DashboardLink link={makePrivateRoute(PrivateRoutes.TEAMS)} title="Equipos" icon={<GroupsIcon />} />
+                <DashboardLink link={makePrivateRoute(PrivateRoutes.NEWS)} title="Posts" icon={<ArticleIcon />} />
             </BoxContainer>
         </div>
     );
