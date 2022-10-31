@@ -9,4 +9,6 @@ export enum PrivateRoutes {
     USER = 'user/me',
     TEAMS = 'teams',
     CHAMPIONS = 'champions',
+    NEWS = 'news',
+    SINGLE_NEW = 'news/report/:id',
 }
