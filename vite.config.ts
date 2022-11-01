@@ -8,6 +8,10 @@ export default defineConfig({
         react(),
         VitePWA({
             registerType: 'autoUpdate',
+            injectRegister: 'auto',
+            strategies: 'injectManifest',
+            srcDir: '/src',
+            filename: 'sw.ts',
             includeAssets: ['favicon.svg', 'robots.txt', 'safari-pinned-tab.svg'],
             manifest: {
                 name: 'Champions React',
