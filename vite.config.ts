@@ -9,9 +9,7 @@ export default defineConfig({
         VitePWA({
             registerType: 'autoUpdate',
             injectRegister: 'auto',
-            strategies: 'injectManifest',
-            srcDir: '/src',
-            filename: 'sw.ts',
+            strategies: 'generateSW',
             includeAssets: ['favicon.svg', 'robots.txt', 'safari-pinned-tab.svg'],
             manifest: {
                 name: 'Champions React',
@@ -21,6 +19,12 @@ export default defineConfig({
                 display: 'standalone',
                 scope: './',
                 start_url: './',
+                lang: 'es-ES',
+                categories: ['sports'],
+                description: 'App that shows data from WWE 2k games',
+                orientation: 'portrait',
+                dir: 'ltr',
+                display_override: ['standalone'],
                 icons: [
                     {
                         src: '/icons/icon-72x72.png',
