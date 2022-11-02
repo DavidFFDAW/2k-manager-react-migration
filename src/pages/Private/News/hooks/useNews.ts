@@ -10,13 +10,20 @@ export function useFetchNews() {
     const { get } = useHttp();
 
     useEffect(() => {
-        get({ endpoint: AppConfig.NEWS_ENDPOINT })
+        const abortController: AbortController = new AbortController();
+        const signal: AbortSignal = abortController.signal;
+
+        get({ endpoint: AppConfig.NEWS_ENDPOINT }, signal)
             .then(response => {
                 setReports(response.news);
             })
             .finally(() => {
                 setIsFetching(false);
             });
+
+        return () => {
+            abortController.abort();
+        }
     }, []);
 
     return { reports, isFetching };
@@ -29,14 +36,21 @@ export function useFetchSingleNew(reportID: number) {
     const { get } = useHttp();
 
     useEffect(() => {
-        get({ endpoint: `${AppConfig.NEWS_ENDPOINT}?id=${reportID}` })
+        const abortController: AbortController = new AbortController();
+        const signal: AbortSignal = abortController.signal;
+
+        get({ endpoint: `${AppConfig.NEWS_ENDPOINT}?id=${reportID}`}, signal)
             .then(response => {
                 setReport(response.report);
             })
             .finally(() => {
                 setIsFetching(false);
             });
-    }, []);
+
+        return () => {
+            abortController.abort();
+        }
+    }, [ reportID ]);
 
     return { report, isFetching };
 }

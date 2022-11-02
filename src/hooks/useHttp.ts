@@ -17,25 +17,27 @@ export function useHttp() {
                 }
                 return response;
             })
-            .catch((error: any) => {
-                showSnackbar(error.message, 'error');
+            .catch((error: Error) => {
+                if (error.name !== 'AbortError') {
+                    showSnackbar(error.message, 'error');
+                }
             });
     };
 
-    const get = useCallback((request: HttpRequest) => {
-        return processRequest(HttpService.get(request.endpoint));
+    const get = useCallback((request: HttpRequest, signal: AbortSignal) => {
+        return processRequest(HttpService.get(request.endpoint, signal));
     }, []);
 
-    const post = useCallback((request: HttpRequest) => {
-        return processRequest(HttpService.post(request.endpoint, request.body));
+    const post = useCallback((request: HttpRequest, signal: AbortSignal) => {
+        return processRequest(HttpService.post(request.endpoint, request.body, signal));
     }, []);
 
-    const put = useCallback((request: HttpRequest) => {
-        return processRequest(HttpService.put(request.endpoint, request.body));
+    const put = useCallback((request: HttpRequest, signal: AbortSignal) => {
+        return processRequest(HttpService.put(request.endpoint, request.body, signal));
     }, []);
 
-    const deleteRq = useCallback((request: HttpRequest) => {
-        return processRequest(HttpService.delete(request.endpoint));
+    const deleteRq = useCallback((request: HttpRequest, signal: AbortSignal) => {
+        return processRequest(HttpService.delete(request.endpoint, signal));
     }, []);
 
     return { get, post, put, deleteRq };
