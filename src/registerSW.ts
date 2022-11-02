@@ -1,7 +1,7 @@
 import { AppConfig } from './AppConfig';
 
 
-const urlB64ToUint8Array = base64String => {
+const urlB64ToUint8Array = (base64String: string) => {
     const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
     const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/')
     const rawData = atob(base64)
@@ -12,7 +12,7 @@ const urlB64ToUint8Array = base64String => {
     return outputArray
 }
 
-const showLocalNotification = (title, body, swRegistration) => {
+const showLocalNotification = (title: string, body: string, swRegistration: ServiceWorkerRegistration) => {
     const options = {
       body,
       // here you can add more properties like icon, image, vibrate, etc.
@@ -22,7 +22,7 @@ const showLocalNotification = (title, body, swRegistration) => {
 
 
 const getSubscriptionAndAddToken = (registration: any) => {
-    return registration.pushManager.getSubscription().then(subscription => {
+    return registration.pushManager.getSubscription().then((subscription: any) => {
         console.log('Subscription: ', subscription);
         if (!subscription) {
             const generatedSubscription = registration.pushManager.subscribe({
@@ -31,7 +31,7 @@ const getSubscriptionAndAddToken = (registration: any) => {
             });
             console.log(generatedSubscription);
             
-            registration.addEventListener('push', function(event) {
+            registration.addEventListener('push', function(event: any) {
                 if (event.data) {
                   console.log('Push event!! ', event.data.text())
                   showLocalNotification('Test Data', event.data.text(), registration)
