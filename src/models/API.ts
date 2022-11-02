@@ -58,6 +58,14 @@ export interface NewsResponse {
     news: Report[];
 }
 
+export interface Team {
+    id: number;
+    name: string;
+    average: number;
+    created_at: string;
+    updated_at: string;;
+}
+
 export interface ChampionsPartialResponse {
     currentSingles: Champion[];
     currentTagTeams: Champion[];
