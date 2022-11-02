@@ -1,5 +1,4 @@
-import React from 'react';
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import { BoxContainer } from '../../../components/BoxContainer/BoxContainer';
