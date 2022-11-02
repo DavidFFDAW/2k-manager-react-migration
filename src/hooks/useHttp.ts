@@ -18,26 +18,24 @@ export function useHttp() {
                 return response;
             })
             .catch((error: Error) => {
-                if (error.name !== 'AbortError') {
-                    showSnackbar(error.message, 'error');
-                }
+                showSnackbar(error.message, 'error');
             });
     };
 
-    const get = useCallback((request: HttpRequest, signal: AbortSignal) => {
-        return processRequest(HttpService.get(request.endpoint, signal));
+    const get = useCallback((request: HttpRequest) => {
+        return processRequest(HttpService.get(request.endpoint));
     }, []);
 
-    const post = useCallback((request: HttpRequest, signal: AbortSignal) => {
-        return processRequest(HttpService.post(request.endpoint, request.body, signal));
+    const post = useCallback((request: HttpRequest) => {
+        return processRequest(HttpService.post(request.endpoint, request.body));
     }, []);
 
-    const put = useCallback((request: HttpRequest, signal: AbortSignal) => {
-        return processRequest(HttpService.put(request.endpoint, request.body, signal));
+    const put = useCallback((request: HttpRequest) => {
+        return processRequest(HttpService.put(request.endpoint, request.body));
     }, []);
 
-    const deleteRq = useCallback((request: HttpRequest, signal: AbortSignal) => {
-        return processRequest(HttpService.delete(request.endpoint, signal));
+    const deleteRq = useCallback((request: HttpRequest) => {
+        return processRequest(HttpService.delete(request.endpoint));
     }, []);
 
     return { get, post, put, deleteRq };

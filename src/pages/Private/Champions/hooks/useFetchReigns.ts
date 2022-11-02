@@ -10,21 +10,14 @@ export function useFetchReigns() {
     const { get } = useHttp();
 
     useEffect(() => {
-        const abortController: AbortController = new AbortController();
-        const signal: AbortSignal = abortController.signal;
-
-        get({ endpoint: AppConfig.API_BASE_URL + 'champions/get/reigns' }, signal)
+        get({ endpoint: AppConfig.API_BASE_URL + 'champions/get/reigns' })
             .then(response => {
+                console.log(response);
                 setReigns(response.reigns);
             })
             .finally(() => {
                 setIsFetching(false);
             });
-        
-        return () => {
-            console.log('request has been aborted');            
-            abortController.abort();
-        }
     }, []);
 
     return { reigns, isFetching };

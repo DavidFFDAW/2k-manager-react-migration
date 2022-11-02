@@ -16,13 +16,10 @@ export function useAuth() {
     };
 
     const tryLogInUser = useCallback((user: LoginUser) => {
-        const abortController: AbortController = new AbortController();
-        const signal: AbortSignal = abortController.signal;
-
         return post({
             endpoint: AppConfig.API_BASE_URL + 'login',
             body: user,
-        }, signal).then((response: LoginResponse) => {
+        }).then((response: LoginResponse) => {
             if (!response) return;
             persistUserObject(response.user);
             setStoredUser(response.user);
