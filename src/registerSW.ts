@@ -28,8 +28,9 @@ const getSubscriptionAndAddToken = (registration: any) => {
             const generatedSubscription = registration.pushManager.subscribe({
                 userVisibleOnly: true,
                 applicationServerKey: urlB64ToUint8Array(AppConfig.PUSH_VAPID_PUBLIC_KEY),
+            }).then((generated: any) => {
+                console.log(generated);
             });
-            console.log(generatedSubscription);
             
             registration.addEventListener('push', function(event: any) {
                 if (event.data) {
