@@ -23,6 +23,78 @@ a.link {
     text-decoration: none;
 }
 
+img {
+    width: 100%;
+    height: auto;
+}
+img.team_member_image {
+    width: 200px;
+    height: 225px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    /* margin-left: -50px; */
+}
+
+.team_grid {
+    height: 60vw;
+    background-position: center !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    position: absolute;
+    top: 55px;
+    width: 100%;
+    z-index: -1;
+    left: 0;
+}
+
+.body_rest {
+    position: relative;
+    top: 60vw;
+    z-index: 1;
+}
+
+.back {
+    position: relative;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    /* height: ; */
+    z-index: -1;
+}
+.down {
+    margin-top: 35px;
+}
+.panel {
+    box-sizing: border-box;
+    text-align: start;
+    padding: 30px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+.panel h4 {
+    color: #888;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+.panel h4::after {
+    content: '';
+    position: relative;
+    left: -5px;
+    display: block;
+    width: 20%;
+    height: 2px;
+    background: #1976d2;
+}
+.c-i {
+    margin-top: 10px !important;
+}
+.c-i-d {
+    margin-top: 20px !important;
+}
+
 .css-cblmom-MuiButtonBase-root-MuiFab-root,
 .fab {
     position: fixed !important;

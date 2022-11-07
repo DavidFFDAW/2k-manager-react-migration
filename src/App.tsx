@@ -10,6 +10,7 @@ import { AppRoutes, PrivateRoutes } from './models/routes';
 import { LoginAuthGuard } from './guards/login.guard';
 import theme from './theme';
 import './App.css';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 const Login = lazy(() => import('./pages/Login'));
 const PrivateRoutingModule = lazy(() => import('./pages/Private/PrivateRoutingModule'));
@@ -17,30 +18,32 @@ const PrivateRoutingModule = lazy(() => import('./pages/Private/PrivateRoutingMo
 function App() {
     return (
         <ThemeProvider theme={theme}>
-            <SnackbarProvider
-                maxSnack={4}
-                autoHideDuration={3500}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-            >
-                <Suspense fallback={<CircularProgress />}>
-                    <BrowserRouter>
-                        <UserProvider>
-                            {/* <Links /> */}
-                            <RoutesWithNotFound>
-                                <Route path="/" element={<Navigate to={AppRoutes.LOGIN} replace />} />
+            <ErrorBoundary>
+                <SnackbarProvider
+                    maxSnack={4}
+                    autoHideDuration={3500}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                >
+                    <Suspense fallback={<CircularProgress />}>
+                        <BrowserRouter>
+                            <UserProvider>
+                                {/* <Links /> */}
+                                <RoutesWithNotFound>
+                                    <Route path="/" element={<Navigate to={AppRoutes.LOGIN} replace />} />
 
-                                <Route element={<LoginAuthGuard />}>
-                                    <Route path={AppRoutes.LOGIN} element={<Login />} />
-                                </Route>
+                                    <Route element={<LoginAuthGuard />}>
+                                        <Route path={AppRoutes.LOGIN} element={<Login />} />
+                                    </Route>
 
-                                <Route element={<AuthGuard privateValidation={true} />}>
-                                    <Route path={`${PrivateRoutes.PRIVATE}/*`} element={<PrivateRoutingModule />} />
-                                </Route>
-                            </RoutesWithNotFound>
-                        </UserProvider>
-                    </BrowserRouter>
-                </Suspense>
-            </SnackbarProvider>
+                                    <Route element={<AuthGuard privateValidation={true} />}>
+                                        <Route path={`${PrivateRoutes.PRIVATE}/*`} element={<PrivateRoutingModule />} />
+                                    </Route>
+                                </RoutesWithNotFound>
+                            </UserProvider>
+                        </BrowserRouter>
+                    </Suspense>
+                </SnackbarProvider>
+            </ErrorBoundary>
         </ThemeProvider>
     );
 }
