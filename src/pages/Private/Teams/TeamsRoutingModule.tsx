@@ -5,6 +5,8 @@ import RoutesWithNotFound from '../../../components/RoutesWithNotFound';
 // import { PrivateRoutes } from '../../../models/routes';
 
 const Teams = lazy(() => import('./Teams'));
+const SingleTeam = lazy(() => import('./SingleTeam'));
+const NewTeam = lazy(() => import('./pages/NewTeam/NewTeam'));
 
 export function TeamsRoutingModule() {
     return (
@@ -14,11 +16,18 @@ export function TeamsRoutingModule() {
                 path="/new"
                 element={
                     <BoxContainer>
-                        <h1>Nuevo equipo Crear</h1>
+                        <NewTeam />
                     </BoxContainer>
                 }
             ></Route>
-            <Route path="/view/:id" element={<h1 style={{ marginTop: 100 }}>Ver equipo</h1>}></Route>
+            <Route
+                path="/view/:id"
+                element={
+                    <BoxContainer>
+                        <SingleTeam />
+                    </BoxContainer>
+                }
+            ></Route>
             <Route path="/edit/:id" element={<h1 style={{ marginTop: 100 }}>Editar equipo</h1>}></Route>
         </RoutesWithNotFound>
     );
