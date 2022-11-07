@@ -58,6 +58,37 @@ export interface NewsResponse {
     news: Report[];
 }
 
+export interface TeamMember {
+    id: number;
+    name: string;
+    image_name: string;
+    brand: string;
+    status: string;
+    sex: string;
+}
+
+export interface Brand {
+    id: number;
+    name: string;
+    logo: string;
+    background: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface SingleTeam {
+    id: number;
+    name: string;
+    count: number;
+    average: number;
+    created_at: string;
+    updated_at: string;
+    member_champion_2: number | string | null;
+    member_champion_1: number | string | null;
+    members: TeamMember[];
+    brand: Brand;
+}
+
 export interface Team {
     id: number;
     name: string;
