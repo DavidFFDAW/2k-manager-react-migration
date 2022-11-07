@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AppConfig } from '../../../../AppConfig';
 import { useHttp } from '../../../../hooks/useHttp';
-import { BaseResponse, Team } from '../../../../models/API';
+import { BaseResponse, SingleTeam, Team } from '../../../../models/API';
 
 interface TeamResponse extends BaseResponse {
     teams: Team[];
@@ -16,7 +16,6 @@ export function useFetchTeams() {
     useEffect(() => {
         get({ endpoint: AppConfig.TEAMS_ENDPOINT })
             .then((response: TeamResponse) => {
-                console.log(response);
                 setTeams(response.teams);
             })
             .finally(() => {
@@ -25,4 +24,24 @@ export function useFetchTeams() {
     }, []);
 
     return { teams, isFetching };
+}
+
+export function useFetchSingleTeamDetails(id: number): { team: SingleTeam; isFetching: boolean } {
+    const endpoint = `${AppConfig.SINGLE_TEAM_ENDPOINT}${id}`;
+    const [team, setTeam] = useState<SingleTeam>({} as SingleTeam);
+    const [isFetching, setIsFetching] = useState<boolean>(true);
+
+    const { get } = useHttp();
+
+    useEffect(() => {
+        get({ endpoint })
+            .then((response: any) => {
+                setTeam(response.team);
+            })
+            .finally(() => {
+                setIsFetching(false);
+            });
+    }, []);
+
+    return { team, isFetching };
 }
