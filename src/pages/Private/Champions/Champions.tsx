@@ -4,6 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { BoxContainer } from '../../../components/BoxContainer/BoxContainer';
 import { ChampionsTable } from '../../../components/Table/ChampionsTable';
 import { TableSkeleton } from '../../../components/Table/TableSkeleton';
+import ChampionsGrid from './views/ChampionsGrid';
 
 export default function Champions({ hasAdminPermission }: any) {
     const { reigns, isFetching } = useFetchReigns();
@@ -20,7 +21,8 @@ export default function Champions({ hasAdminPermission }: any) {
     return (
         <>
             <BoxContainer title="Singles">
-                <ChampionsTable rows={reigns.currentSingles} />
+                <ChampionsGrid champions={reigns.currentSingles} />
+                {/* <ChampionsTable rows={reigns.currentSingles} /> */}
             </BoxContainer>
 
             {isAdmin && (
