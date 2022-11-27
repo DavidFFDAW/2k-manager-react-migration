@@ -1,6 +1,8 @@
+import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { BoxContainer } from './BoxContainer/BoxContainer';
-import NotFound from './Not-found';
+
+const NotFound = lazy(() => import('./Not-found'));
 
 interface Props {
     children: JSX.Element[] | JSX.Element;
